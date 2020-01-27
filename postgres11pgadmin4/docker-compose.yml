@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+
+  postgres:
+    image: postgres:11.5-alpine
+    restart: always
+    env_file:
+      - postgres.env
+    volumes:
+      - data:/var/lib/postgresql/data    
+    ports:
+      - "5432:5432"
+    container_name: postgres-container
+
+  pgadmin4:
+    image: dpage/pgadmin4
+    env_file:
+      - pgadmin4.env
+    ports:
+      - "16543:80"
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+    depends_on:
+      - postgres
+    container_name: pgadmin4-container
+
+volumes:
+  data:
+    name: postgresql-data
