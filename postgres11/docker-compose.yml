@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+
+  db:
+    image: postgres:11.5-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_USER: robson
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+    container_name: db
+
+volumes:
+  data:
+    name: postgresql-data
