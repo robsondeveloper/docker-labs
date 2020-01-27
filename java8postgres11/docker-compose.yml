@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  postgres:
+    build: postgres/
+    volumes:
+      - data:/var/lib/postgresql/data    
+    ports:
+      - "5432:5432"
+    container_name: postgres-container
+  app:
+    build: app/
+    ports:
+      - "8080:8080"
+    container_name: app-container
+    network_mode: "host"
+
+volumes:
+  data:
+    name: my-app-data
