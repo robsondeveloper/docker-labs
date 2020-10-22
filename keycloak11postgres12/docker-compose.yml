@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+
+  postgres:
+    image: postgres:12.4-alpine
+    environment:
+        POSTGRES_DB: keycloak
+        POSTGRES_USER: keycloak
+        POSTGRES_PASSWORD: keycloak
+    ports:
+      - "5432:5432"
+    networks: 
+      - keycloak_network
+    container_name: postgres
+
+  keycloak:
+    image: jboss/keycloak:11.0.2
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+      DB_ADDR: postgres
+    ports:
+      - "8080:8080"
+    networks: 
+      - keycloak_network
+    depends_on: 
+      - postgres
+    container_name: keycloak
+
+networks: 
+  keycloak_network:
+    name: keycloak_network
+    driver: bridge  
