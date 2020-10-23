@@ -19,12 +19,13 @@ services:
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
+      DB_VENDOR: postgres
       DB_DATABASE: keycloak
       DB_USER: keycloak
       DB_PASSWORD: keycloak
       DB_ADDR: postgres
     ports:
-      - "8080:8080"
+      - "8180:8080"
     networks: 
       - keycloak_network
     depends_on: 
@@ -34,4 +35,4 @@ services:
 networks: 
   keycloak_network:
     name: keycloak_network
-    driver: bridge  
+    driver: bridge
