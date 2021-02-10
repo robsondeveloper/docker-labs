@@ -1,20 +1,20 @@
-version: "3.7"
+version: "3.8"
 
 services:
 
   db:
-    image: postgres:11.5-alpine
+    image: postgres:12.5-alpine
     restart: always
     environment:
-      POSTGRES_PASSWORD: mypassword
+      POSTGRES_PASSWORD: robson
       POSTGRES_USER: robson
       POSTGRES_DB: mydb
     ports:
-      - "5432:5432"
+      - 15432:5432
     volumes:
       - data:/var/lib/postgresql/data
-    container_name: db
+    container_name: postgres_mydb
 
 volumes:
   data:
-    name: postgresql-data
+    name: postgres_mydb
