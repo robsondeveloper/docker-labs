@@ -9,7 +9,7 @@ services:
         POSTGRES_USER: keycloak
         POSTGRES_PASSWORD: keycloak
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_keycloak:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks: 
@@ -35,8 +35,8 @@ services:
     container_name: keycloak_container
 
 volumes:
-  postgres_data:
-    name: postgres_data
+  postgres_keycloak:
+    name: postgres_keycloak
 
 networks:
   keycloak_network:
