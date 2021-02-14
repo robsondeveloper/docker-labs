@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+
+  keycloak_aws:
+    build: .
+    image: robsondeveloper/keycloak_aws:1
+    ports:
+      - 443:8443
+    volumes:
+      - ./certs:/etc/x509/https
+    container_name: keycloak_aws
