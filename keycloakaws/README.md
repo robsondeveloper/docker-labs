@@ -2,7 +2,7 @@
 
 ### generate a self-signed cert using the keytool
 ```
-keytool -genkey -alias localhost -keyalg RSA -keystore keycloak.jks -validity 3650
+keytool -genkey -alias localhost -keyalg RSA -keystore keycloak.jks -validity 3650 -ext SAN=dns:localhost,dns:ec2-52-67-60-255.sa-east-1.compute.amazonaws.com
 ```
 
 ### convert .jks to .p12
