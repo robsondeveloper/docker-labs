@@ -6,7 +6,7 @@ services:
     build: .
     image: robsondeveloper/keycloak_aws:1
     ports:
-      - 443:8443
+      - 8443:8443
     volumes:
       - ./certs:/etc/x509/https
     container_name: keycloak_aws

@@ -20,8 +20,12 @@ openssl pkcs12 -in keycloak.p12 -nokeys -out tls.crt
 openssl pkcs12 -in keycloak.p12 -nocerts -nodes -out tls.key
 ```
 
-### Then use the tls.crt and tls.key for volume mount /etc/x509/https
+### set permissions
+```
+chmod 777 tls.*
+```
 
+### Then use the tls.crt and tls.key for volume mount /etc/x509/https
 ### Also, on the securing app, specify the following properties
 ```
 keycloak.truststore=classpath:keystore/keycloak.jks
