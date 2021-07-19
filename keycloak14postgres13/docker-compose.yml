@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:13.3-alpine3.14
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=robson
+      - POSTGRES_PASSWORD=secret79
+    ports:
+      - 5432:5432
+    networks:
+      - keycloak_network
+    volumes:
+      - keycloak_data:/var/lib/postgresql/data
+    container_name: keycloak_postgres
+  keycloak:
+    image: quay.io/keycloak/keycloak:14.0.0
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=secret79
+      - DB_VENDOR=postgres
+      - DB_ADDR=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=keycloak
+      - DB_USER=robson
+      - DB_PASSWORD=secret79
+    ports:
+      - 8080:8080
+    networks:
+      - keycloak_network
+    depends_on:
+      - postgres
+    container_name: keycloak14
+networks:
+  keycloak_network:
+    name: keycloak_network
+volumes:
+  keycloak_data:
+    name: keycloak_data
