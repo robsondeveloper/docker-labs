@@ -1,0 +1,11 @@
+docker exec gitlab_runner \
+    gitlab-runner register \
+    --non-interactive \
+    --url "http://192.168.0.38:8929" \
+    --registration-token "Fzw--GrhUuEP5WV4HRm1" \
+    --clone-url http://192.168.0.38:8929 \
+    --executor "docker" \
+    --docker-image alpine:latest \
+    --description "docker-runner" \
+    --tag-list "docker,aws" \
+    --docker-privileged

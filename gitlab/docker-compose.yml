@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+    gitlab:
+        image: gitlab/gitlab-ce:latest
+        container_name: gitlab
+        restart: always
+        hostname: '192.168.0.38'
+        environment:
+          GITLAB_OMNIBUS_CONFIG: |
+            external_url 'http://192.168.0.38:8929'
+            gitlab_rails['gitlab_shell_ssh_port'] = 2224
+        ports:
+          - '8929:8929'
+          - '2224:22'
+        networks: 
+          - gitlab_network
+        volumes:
+          - 'gitlab_config:/etc/gitlab'
+          - 'gitlab_logs:/var/log/gitlab'
+          - 'gitlab_data:/var/opt/gitlab'
+
+    gitlab_runner:
+       image: gitlab/gitlab-runner:latest
+       container_name: gitlab_runner
+       restart: always
+       networks: 
+         - gitlab_network
+       volumes: 
+         - '/var/run/docker.sock:/var/run/docker.sock'
+         - 'gitlab_runner_config:/etc/gitlab-runner'
+
+networks: 
+    gitlab_network:
+        name: gitlab_network
+
+volumes: 
+    gitlab_config:
+        name: gitlab_config
+    gitlab_logs:
+        name: gitlab_logs
+    gitlab_data:
+        name: gitlab_data
+    gitlab_runner_config:
+        name: gitlab_runner_config
